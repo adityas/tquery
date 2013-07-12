@@ -108,6 +108,7 @@ tQuery.Headtrackr.prototype._facetrackingEventCb = function(headtrackrEvent){
 	event.x		= - (headtrackrEvent.x-canvasHalfW)/canvasHalfW;
 	event.y		= - (headtrackrEvent.y-canvasHalfH)/canvasHalfH;
 	event.width	= headtrackrEvent.width  / canvasHalfW;
+	event.z = event.width;
 	event.height	= headtrackrEvent.height / canvasHalfH;
 	event.angle	= headtrackrEvent.angle + Math.PI/2;
 	event.headtrackrEvent	= headtrackrEvent;

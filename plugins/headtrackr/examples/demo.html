@@ -41,7 +41,7 @@ require(['tquery.skymap', 'tquery.lensflare', 'tquery.headtrackr', 'tquery.loade
 	// create the headTracker
 	var headTracker	= tQuery.createHeadtrackr({
 		headtrackrOpts	: {
-			calcAngles	: false
+			calcAngles	: true
 		}
 	}).debugView(true).start();
 
@@ -49,8 +49,12 @@ require(['tquery.skymap', 'tquery.lensflare', 'tquery.headtrackr', 'tquery.loade
 	headTracker.addEventListener("found", function(event){
 		// set the position of the camera
 		var angleY	= Math.PI/3 * event.x + Math.PI/2;
-		world.tCamera().position.x	= Math.cos(angleY)*cameraZ;
-		world.tCamera().position.z	= Math.sin(angleY)*cameraZ;
+		console.log(event.z);
+		world.tCamera().position.x	= event.x/2.0;
+		world.tCamera().position.y	= event.y;
+		world.tCamera().position.z	= cameraZ - 2*(event.z - 0.5);
+		console.log(world.tCamera().position.z);
+		//world.tCamera().position.z	= Math.sin(angleY)*cameraZ;
 		// update the target
 		world.tCamera().lookAt(world.tScene().position);
 	});
